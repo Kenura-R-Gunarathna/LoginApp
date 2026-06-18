@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "743768413194",
+    "project_id": "krag-login-app",
+    "storage_bucket": "krag-login-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:743768413194:android:0ac185754ad6cce975bbf3",
+        "android_client_info": {
+          "package_name": "lk.krag.loginapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCo06aLkdlxjK5ObA5FmJoQjsv-wctyovU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

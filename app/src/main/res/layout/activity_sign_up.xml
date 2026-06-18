@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".SignUpActivity">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <include
+                android:id="@+id/header"
+                layout="@layout/header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:headerTitle="@{@string/sign_up_title}" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:weightSum="2">
+
+                <ImageView
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:src="@drawable/profile"
+                    android:paddingVertical="16dp"
+                    android:scaleType="centerCrop" />
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="16dp"
+                    android:gravity="center"
+                    android:weightSum="5">
+
+                    <EditText
+                        android:id="@+id/email"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:inputType="textEmailAddress"
+                        android:hint="@string/email" />
+
+                    <EditText
+                        android:id="@+id/password"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:inputType="textPassword"
+                        android:hint="@string/password" />
+
+                    <EditText
+                        android:id="@+id/confirmPassword"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:inputType="textPassword"
+                        android:hint="@string/confirm_password" />
+
+                    <Button
+                        android:id="@+id/btn_sign_up"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:backgroundTint="@color/primary_background"
+                        android:textColor="@color/primary_text"
+                        app:strokeColor="@color/primary_border_color"
+                        app:strokeWidth="2dp"
+                        android:text="@string/sign_up" />
+
+                    <TextView
+                        android:id="@+id/tvGoToSignIn"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:gravity="center"
+                        android:text="@string/go_to_sign_in"
+                        android:textColor="@color/primary"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

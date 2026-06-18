@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Login App</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="remember_me">Remember me</string>
+    <string name="login">Login</string>
+    <string name="cancel">Cancel</string>
+    <string name="switch_local">Local Login</string>
+    <string name="switch_firebase">Firebase Login</string>
+    <string name="login_success">Login successful</string>
+    <string name="error_empty_fields">Please enter email and password</string>
+    <string name="error_invalid_credentials">Invalid email or password</string>
+    <string name="error_no_local_credentials">No local credentials saved. Login with Firebase first.</string>
+    <string name="sign_in_title">Sign In</string>
+    <string name="sign_up_title">Sign Up</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="go_to_sign_up">Don\'t have an account? Sign Up</string>
+    <string name="go_to_sign_in">Already have an account? Sign In</string>
+    <string name="error_passwords_dont_match">Passwords do not match</string>
+    <string name="error_email_exists">Email already registered</string>
+    <string name="signup_success">Account created! Please sign in.</string>
+    <string name="profile_title">Profile</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="uni_faculty">University Faculty</string>
+    <string name="update">Update</string>
+    <string name="profile_updated">Profile updated</string>
+</resources>

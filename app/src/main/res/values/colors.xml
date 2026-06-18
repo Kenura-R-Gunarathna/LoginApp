@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- App theme -->
+    <color name="primary">#00684A</color>
+    <color name="primary_dark">#001E2B</color>
+    <color name="primary_accent">#00ED64</color>
+
+    <!-- Login button (primary action) -->
+    <color name="primary_background">#00ED64</color>
+    <color name="primary_text">#001E2B</color>
+    <color name="primary_border_color">#00684A</color>
+
+    <!-- Cancel button (secondary action) -->
+    <color name="secondary_background">#E8EDEB</color>
+    <color name="secondary_text">#001E2B</color>
+    <color name="secondary_border_color">#C8D5D0</color>
+</resources>
