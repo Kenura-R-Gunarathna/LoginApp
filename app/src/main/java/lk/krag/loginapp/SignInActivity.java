@@ -12,24 +12,26 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.databinding.DataBindingUtil;
 
-import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.auth.FirebaseAuth;
 
-import lk.krag.loginapp.databinding.ActivityMainBinding;
+import lk.krag.loginapp.databinding.ActivitySignInBinding;
 
-public class MainActivity extends AppCompatActivity {
+public class SignInActivity extends AppCompatActivity {
 
     static final String PREFS_NAME = "login_prefs";
     static final String KEY_EMAIL = "email";
     static final String KEY_PASSWORD = "password";
     static final String FIREBASE_DB_URL = "https://krag-login-app-default-rtdb.asia-southeast1.firebasedatabase.app/";
 
-    private ActivityMainBinding binding;
+    private ActivitySignInBinding binding;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_sign_in);
+        mAuth = FirebaseAuth.getInstance();
         ViewCompat.setOnApplyWindowInsetsListener(binding.getRoot(), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -65,23 +67,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void signInWithFirebase(String email, String password) {
-        String encodedEmail = email.replace(".", ",");
-        FirebaseDatabase.getInstance(FIREBASE_DB_URL)
-                .getReference("users")
-                .child(encodedEmail)
-                .child("password")
-                .get()
-                .addOnSuccessListener(documentSnapshot -> {
-                    if (!documentSnapshot.exists()) {
-                        Toast.makeText(this, R.string.error_invalid_credentials, Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                    String storedPassword = documentSnapshot.getValue(String.class);
-                    if (password.equals(storedPassword)) {
-                        Toast.makeText(this, R.string.login_success, Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(this, R.string.error_invalid_credentials, Toast.LENGTH_SHORT).show();
-                    }
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnSuccessListener(authResult -> {
+                    Toast.makeText(this, R.string.login_success, Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(this, ProfileActivity.class);
+                    intent.putExtra("email", email);
+                    startActivity(intent);
+                    finish();
                 })
                 .addOnFailureListener(e ->
                         Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show());
@@ -99,6 +91,10 @@ public class MainActivity extends AppCompatActivity {
 
         if (email.equals(savedEmail) && password.equals(savedPassword)) {
             Toast.makeText(this, R.string.login_success, Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, ProfileActivity.class);
+            intent.putExtra("email", email);
+            startActivity(intent);
+            finish();
         } else {
             Toast.makeText(this, R.string.error_invalid_credentials, Toast.LENGTH_SHORT).show();
         }

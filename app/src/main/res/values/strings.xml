@@ -28,4 +28,11 @@
     <string name="uni_faculty">University Faculty</string>
     <string name="update">Update</string>
     <string name="profile_updated">Profile updated</string>
+    <string name="delete_profile">Delete Profile</string>
+    <string name="logout">Logout</string>
+    <string name="confirm_delete_title">Confirm Delete</string>
+    <string name="confirm_delete_message">Are you sure you want to delete your profile? This will also remove your account.</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="account_deleted">Account and profile deleted</string>
 </resources>

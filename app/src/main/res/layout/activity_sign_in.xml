@@ -9,7 +9,7 @@
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".SignUpActivity">
+        tools:context=".SignInActivity">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -21,7 +21,7 @@
                 layout="@layout/header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:headerTitle="@{@string/sign_up_title}" />
+                app:headerTitle="@{@string/sign_in_title}" />
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -69,34 +69,42 @@
                             android:inputType="textPassword" />
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="24dp"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="16dp">
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/confirmPassword"
-                            android:layout_width="match_parent"
+                        <CheckBox
+                            android:id="@+id/remember_me"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:hint="@string/confirm_password"
-                            android:inputType="textPassword" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                            android:layout_weight="1"
+                            android:text="@string/remember_me" />
+
+                        <com.google.android.material.switchmaterial.SwitchMaterial
+                            android:id="@+id/toggleLoginMethod"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="@string/switch_local" />
+
+                    </LinearLayout>
 
                     <Button
-                        android:id="@+id/btnSignUp"
+                        android:id="@+id/btnSignIn"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="16dp"
-                        android:text="@string/sign_up"
+                        android:text="@string/sign_in"
                         android:backgroundTint="@color/primary"
                         android:textColor="@color/white" />
 
                     <TextView
-                        android:id="@+id/tvGoToSignIn"
+                        android:id="@+id/tvGoToSignUp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/go_to_sign_in"
+                        android:text="@string/go_to_sign_up"
                         android:textColor="@color/primary"
                         android:textStyle="bold"
                         android:padding="8dp" />

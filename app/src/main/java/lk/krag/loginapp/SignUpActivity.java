@@ -11,6 +11,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.databinding.DataBindingUtil;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
 import lk.krag.loginapp.databinding.ActivitySignUpBinding;
@@ -18,12 +19,14 @@ import lk.krag.loginapp.databinding.ActivitySignUpBinding;
 public class SignUpActivity extends AppCompatActivity {
 
     private ActivitySignUpBinding binding;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_sign_up);
+        mAuth = FirebaseAuth.getInstance();
         ViewCompat.setOnApplyWindowInsetsListener(binding.getRoot(), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -49,30 +52,34 @@ public class SignUpActivity extends AppCompatActivity {
             return;
         }
 
-        SharedPreferences prefs = getSharedPreferences(MainActivity.PREFS_NAME, MODE_PRIVATE);
+        SharedPreferences prefs = getSharedPreferences(SignInActivity.PREFS_NAME, MODE_PRIVATE);
 
-        if (prefs.getString(MainActivity.KEY_EMAIL, null) != null) {
+        if (prefs.getString(SignInActivity.KEY_EMAIL, null) != null) {
             Toast.makeText(this, R.string.error_email_exists, Toast.LENGTH_SHORT).show();
             return;
         }
 
         // Save locally
         prefs.edit()
-                .putString(MainActivity.KEY_EMAIL, email)
-                .putString(MainActivity.KEY_PASSWORD, password)
+                .putString(SignInActivity.KEY_EMAIL, email)
+                .putString(SignInActivity.KEY_PASSWORD, password)
                 .apply();
 
-        // Save to Firebase (dots not allowed in RTDB keys, replace with commas)
-        String encodedEmail = email.replace(".", ",");
-        FirebaseDatabase.getInstance(MainActivity.FIREBASE_DB_URL)
-                .getReference("users")
-                .child(encodedEmail)
-                .child("password")
-                .setValue(password)
-                .addOnFailureListener(e ->
-                        Toast.makeText(this, "Local save OK, Firebase failed: " + e.getMessage(), Toast.LENGTH_LONG).show());
+        // Firebase Auth
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnSuccessListener(authResult -> {
+                    // Save to Realtime Database as well (educational purposes)
+                    String encodedEmail = email.replace(".", ",");
+                    FirebaseDatabase.getInstance(SignInActivity.FIREBASE_DB_URL)
+                            .getReference("users")
+                            .child(encodedEmail)
+                            .child("password")
+                            .setValue(password);
 
-        Toast.makeText(this, R.string.signup_success, Toast.LENGTH_SHORT).show();
-        finish();
+                    Toast.makeText(this, R.string.signup_success, Toast.LENGTH_SHORT).show();
+                    finish();
+                })
+                .addOnFailureListener(e ->
+                        Toast.makeText(this, "Firebase failed: " + e.getMessage(), Toast.LENGTH_LONG).show());
     }
 }
